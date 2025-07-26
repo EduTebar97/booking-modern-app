@@ -1,12 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;500;700&display=swap");
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
 
 body {
-  font-family: "Comfortaa", cursive;
+  font-family: "Comfortaa", cursive; /* Keeping your existing font-family */
+  @apply font-sans; /* Applying font-sans from Tailwind config */
+  background-color: #f5f6fa; /* Background color from the other project */
 }
 
 main {
   min-height: 80vh;
-  background-color: rgb(20, 180, 116);
+  /* Keeping your existing background-color for now, you can adjust it later */
+  /* background-color: rgb(20, 180, 116); */
 }
 
 .react-datepicker-wrapper {
@@ -63,4 +83,148 @@ main {
 
 #mainmenu li a {
   font-size: 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f15a24;
+  border-radius: 20px;
+}
+
+@media (max-width: 990px) {
+  .full-width {
+    width: 100%;
+  }
+}
+
+.app {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #f5f6fa;
+  padding: 20px;
+}
+
+.app__dropdown {
+  background-color: white;
+}
+
+.app__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.app__header > h1 {
+  color: #686de0;
+  font-size: 2rem;
+}
+
+.app__stats {
+  display: flex;
+  justify-content: space-between;
+}
+
+.app__left {
+  flex: 0.9;
+}
+
+.app__information > h3 {
+  color: #6a5d5d;
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.app__information > h3:last-of-type {
+  margin-top: 1rem;
+}
+
+@media (max-width: 990px) {
+  .app {
+    flex-direction: column;
+  }
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  background: #4aa9de;
+  border-radius: 5px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  background: #2a6586;
+  border-radius: 50px;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #4aa9de;
+}
+
+input[type=range]::-moz-range-track {
+  background: #4aa9de;
+  border-radius: 5px;
+}
+
+input[type=range]::-moz-range-thumb {
+  background: #2a6586;
+  border-radius: 50px;
+}
+
+input[type=range]::-ms-fill-lower {
+  background: #4aa9de;
+  border-radius: 10px;
+}
+
+input[type=range]::-ms-fill-upper {
+  background: #4aa9de;
+  border-radius: 10px;
+}
+
+input[type=range]::-ms-thumb {
+  background: #2a6586;
+  border-radius: 50px;
+}
+
+.plsoptions {
+  justify-self: flex-end;
+}
+
+#particles canvas{
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.start-button {
+  background-color: purple;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.toggle-button {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
 }

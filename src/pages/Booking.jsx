@@ -8,6 +8,8 @@ import {
   faWifi,
   faSwimmer,
   faParking,
+  faTh,
+  faList,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -24,6 +26,7 @@ function Booking() {
   const location = useLocation();
 
   const [accommodations, setAccommodations] = useState([]);
+  const [viewMode, setViewMode] = useState("grid"); // 'grid' or 'list'
   const [criteria, setCriteria] = useState({
     features: {
       list: ["Parking", "SwimmingPool", "InternetAccess"],
@@ -202,6 +205,14 @@ function Booking() {
                 </div>
               </div>
               <div className="col-lg-9">
+                <div className="d-flex justify-content-end mb-4">
+                  <button className={`btn ${viewMode === 'grid' ? 'btn-primary' : 'btn-outline-primary'} me-2`} onClick={() => setViewMode('grid')}>
+                    <FontAwesomeIcon icon={faTh} />
+                  </button>
+                  <button className={`btn ${viewMode === 'list' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => setViewMode('list')}>
+                    <FontAwesomeIcon icon={faList} />
+                  </button>
+                </div>
                 <div className="row">
                   {loading ? (
                     Array.from({ length: 6 }).map((_, index) => <BookingCardSkeleton key={index} />)
@@ -214,18 +225,24 @@ function Booking() {
                       const hasInternet = data.services?.some((s) => s.type === "INTERNET_ACCESS");
                       const hasParking = data.services?.some((s) => s.type === "PARKING");
                       const hasPool = data.services?.some((s) => s.type === "SWIMMING_POOL");
+                      
+                      const cardClass = viewMode === 'grid' ? 'col-lg-6 mb-4' : 'col-lg-12 mb-4';
+                      const cardLayoutClass = viewMode === 'list' ? 'd-flex' : '';
+                      const imageClass = viewMode === 'list' ? 'w-50' : '';
+                      const bodyClass = viewMode === 'list' ? 'w-50' : '';
+
                       return (
                         <motion.div
-                          className="col-lg-6 mb-4"
+                          className={cardClass}
                           key={`accom_${index}`}
                           variants={cardVariants}
                           initial="hidden"
                           animate="visible"
                           transition={{ duration: 0.5, delay: index * 0.1 }}
                         >
-                          <div className="de-item booking-card h-100">
-                            <img src={imageUrl} className="card-img-top" alt={data.name || "imagen"} />
-                            <div className="card-body d-flex flex-column">
+                          <div className={`de-item booking-card h-100 ${cardLayoutClass}`}>
+                            <img src={imageUrl} className={`card-img-top ${imageClass}`} alt={data.name || "imagen"} />
+                            <div className={`card-body d-flex flex-column ${bodyClass}`}>
                               <h5 className="card-title">{accom.name}</h5>
                               <p className="card-text text-muted">{data.location?.cityName || "Sin ciudad"} - {data.type || ""}</p>
                               

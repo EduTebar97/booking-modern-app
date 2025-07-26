@@ -7,12 +7,13 @@ import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import "./../assets/css/booking/bootstrap.min.css";
-import "./../assets/css/booking/mdb.min.css";
-import "./../assets/css/booking/plugins.css";
-import "./../assets/css/booking/style.css";
-import "./../assets/css/booking/coloring.css";
-import "./../assets/css/booking/colors/scheme-01.css";
+// Remove these imports as we will use Tailwind and the new global styles
+// import "./../assets/css/booking/bootstrap.min.css";
+// import "./../assets/css/booking/mdb.min.css";
+// import "./../assets/css/booking/plugins.css";
+// import "./../assets/css/booking/style.css";
+// import "./../assets/css/booking/coloring.css";
+// import "./../assets/css/booking/colors/scheme-01.css";
 import { getAccomodations } from "apis/apis";
 
 function BookingCardGroup() {
@@ -94,49 +95,23 @@ function BookingCardGroup() {
   return (
     <section
       id="section-cards"
-      style={{
-        margin: "auto",
-        height: "fit-content",
-        position: "relative",
-      }}
+      className="mx-auto h-fit relative"
+      style={{ /* Consider replacing inline styles with Tailwind */ }}
     >
+      {/* Navigation buttons - consider restyling with Tailwind */} 
       <button
         onClick={goToPrevSlide}
-        style={{
-          position: "absolute",
-          transform: "translate(0%, -50%) scaleY(1.5)",
-          top: "50%",
-          left: "-80px",
-          borderRadius: "100px",
-          width: "50px",
-          height: "50px",
-          backgroundColor: "initial",
-          border: "0px",
-          color: "white",
-          fontSize: "50px",
-        }}
+        className="absolute top-1/2 transform -translate-y-1/2 -left-20 rounded-full w-12 h-12 bg-transparent border-0 text-white text-5xl"
       >
-        <span className="custom-arrow" style={{ color: "#aaaaaa" }}>
+        <span className="custom-arrow text-gray-400">
           &#11164;
         </span>
       </button>
       <button
         onClick={goToNextSlide}
-        style={{
-          position: "absolute",
-          transform: "translate(0%, -50%) scaleY(1.5)",
-          top: "50%",
-          right: "-80px",
-          borderRadius: "100px",
-          width: "50px",
-          height: "50px",
-          backgroundColor: "initial",
-          border: "0px",
-          color: "white",
-          fontSize: "50px",
-        }}
+        className="absolute top-1/2 transform -translate-y-1/2 -right-20 rounded-full w-12 h-12 bg-transparent border-0 text-white text-5xl"
       >
-        <span className="custom-arrow" style={{ color: "#aaaaaa" }}>
+        <span className="custom-arrow text-gray-400">
           &#11166;
         </span>
       </button>
@@ -151,11 +126,8 @@ function BookingCardGroup() {
           dotListClass="custom-dot-list-style"
           slidesToSlide={1}
           ref={carouselRef}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            position: "relative",
-          }}
+          className="flex justify-center relative"
+          style={{ /* Consider replacing inline styles with Tailwind */ }}
         >
           {accommodations.map((accom, index) => {
             // Extraer la descripción en español de la galería
@@ -167,18 +139,8 @@ function BookingCardGroup() {
             return (
               <div
                 key={accom.id} // Usar id como key única
-                style={{
-                  width: "350px",
-                  height: "550px",
-                  border: "1px solid black",
-                  borderRadius: "10px",
-                  padding: "20px 5px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  backgroundColor: "#dddddd",
-                  margin: "auto",
-                }}
+                className="bg-white rounded-lg shadow-lg p-6 text-center max-w-sm mx-auto flex flex-col items-center h-[550px] w-[350px] border border-black"
+                style={{ /* Remove inline styles here or replace with Tailwind */ }}
               >
                 <img
                   src={
@@ -186,86 +148,38 @@ function BookingCardGroup() {
                       ? accom.gallery.data.images[0].url
                       : ""
                   }
-                  style={{
-                    width: "100%",
-                    height: "200px",
-                    borderRadius: "10px",
-                  }}
                   alt="card img"
+                  className="w-full h-40 object-cover rounded-lg mb-4"
                 />
                 <p
-                  style={{
-                    fontSize: "16px",
-                    color: "#522D3C",
-                    margin: "10px",
-                    fontWeight: "1000",
-                    letterSpacing: "1px",
-                    lineHeight: "18px",
-                    height: "50px",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
+                  className="text-xl font-bold text-gray-800 mb-2 text-[#522D3C] font-black tracking-wide leading-tight h-12 flex items-center justify-center"
                 >
                   {accom.data?.name || ""}
                 </p>
                 <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "95%",
-                    gap: "16px",
-                  }}
+                  className="flex justify-center items-center w-11/12 gap-4"
                 >
                   {/* Para evitar nesting warnings, usamos un div en lugar de <p> */}
                   <div
                     dangerouslySetInnerHTML={{ __html: descriptionHTML }}
-                    style={{
-                      fontSize: "15px",
-                      color: "black",
-                      fontWeight: "600",
-                      margin: "0px",
-                      lineHeight: "20px",
-                      width: "100%",
-                      overflowY: "auto",
-                      height: "100px",
-                    }}
+                    className="text-sm text-black font-semibold leading-tight w-full overflow-y-auto h-24"
                   />
                 </div>
-                <div style={{ display: "flex", margin: "10px" }}>
+                <div className="flex justify-center mt-2">
                   <p
-                    style={{
-                      fontSize: "12px",
-                      color: "black",
-                      margin: "2px 25px",
-                      fontWeight: "600",
-                    }}
+                    className="text-xs text-black font-semibold mx-6"
                   >
                     View Details &gt;
                   </p>
                 </div>
                 <p
-                  style={{
-                    fontSize: "16px",
-                    color: "#156B7A",
-                    margin: "0px 5px 10px",
-                    fontWeight: "1000",
-                  }}
+                  className="text-base text-[#156B7A] font-black mt-auto mb-2"
                 >
                   o cajea por 50 Gloove point
                 </p>
                 <button
                   onClick={() => navigate(`/car-single/${accom.id}`)}
-                  style={{
-                    width: "200px",
-                    height: "50px",
-                    backgroundColor: "#156B7A",
-                    border: "0px",
-                    borderRadius: "50px",
-                    color: "white",
-                    fontSize: "16px",
-                    fontWeight: "600",
-                  }}
+                  className="w-full h-12 bg-[#156B7A] border-0 rounded-full text-white text-base font-semibold"
                 >
                   AÑADIR A MI VIAJE
                 </button>
@@ -274,20 +188,11 @@ function BookingCardGroup() {
           })}
         </Carousel>
       ) : (
-        <div>Cargando propiedades...</div>
+        <div className="text-center">Cargando propiedades...</div>
       )}
-      <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+      <div className="w-full flex justify-center">
         <button
-          style={{
-            width: "210px",
-            height: "35px",
-            margin: "20px",
-            border: "3px solid #156B7A",
-            borderRadius: "50px",
-            backgroundColor: "#dddddd",
-            color: "#156B7A",
-            fontWeight: "900",
-          }}
+          className="w-52 h-9 m-5 border-3 border-[#156B7A] rounded-full bg-[#dddddd] text-[#156B7A] font-black"
         >
           IR A EXPERIENCIAS
         </button>
